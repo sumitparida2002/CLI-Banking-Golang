@@ -16,7 +16,7 @@ func main() {
 
 	flag.Parse()
 
-	model.Init(*rolePtr)
+	init := model.Init(*rolePtr)
 
 	if *rolePtr == "user" {
 		fmt.Println("Enter Your Account No.")
@@ -37,6 +37,8 @@ func main() {
 		print("Would you like to \n 1.Check Balance\n 2.Withdraw \n 3.Transfer")
 		var option int
 
+		fmt.Scan(&option)
+
 		switch option {
 		case 1:
 			print(result.Balance)
@@ -55,9 +57,21 @@ func main() {
 
 	}
 
+	var password string
+	print("Enter Password")
+	fmt.Scan(&password)
+
+	if init != password {
+		print("Invalid Password")
+		os.Exit(1)
+
+	}
+
 	print("Welcome")
 	print("Would you like to \n 1.Get All Accounts\n 2.Get Specific Account \n 3.Update Account Information \n 4.Delete Account \n 5.Deactivate Account  ")
+
 	var option int
+	fmt.Scan(&option)
 
 	switch option {
 	case 1:

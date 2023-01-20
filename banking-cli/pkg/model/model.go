@@ -10,6 +10,8 @@ import (
 
 var access string
 
+var adminKey string = "yip"
+
 type AccountDetails struct {
 	gorm.Model
 	AccountHolder string
@@ -20,10 +22,14 @@ type AccountDetails struct {
 
 var db *gorm.DB
 
-func Init(role string) {
+func Init(role string) (adminKey string) {
 	db = config.Connect()
 	access = role
 	db.AutoMigrate(&AccountDetails{})
+	if access == "admin" {
+		return adminKey
+	}
+	return
 }
 
 func CreateAccount() {
